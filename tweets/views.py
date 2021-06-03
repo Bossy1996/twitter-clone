@@ -11,6 +11,18 @@ def home_view(request, *args, **kwargs):
     #return HttpResponse("<h1> Hello world </h1>")
     return render(request, 'pages/index.html', context={}, status=200)
 
+def tweet_list_view(request, *args, **kwargs):
+    """
+    REST API VIEW
+    return json data
+    """
+    qs = Tweet.objects.all()
+    tweet_list = [{"id": x.id, "content": x.content} for x in qs]
+    data = {
+        "response": tweet_list
+    }
+    return JsonResponse(data)
+
 def tweet_detail_view(request, tweet_id, *args, **kwargs):
     """
     REST API VIEW
