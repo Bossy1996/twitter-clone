@@ -13,8 +13,7 @@
 2. Tweets 
     -> Creating
         -> Text
-        -> Image
-        -> Video
+        -> Image / Video -> Media storage server
     -> Retweeting
     -> Deleting
 
