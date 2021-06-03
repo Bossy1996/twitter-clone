@@ -1,0 +1,26 @@
+1. Users
+    -> Register
+    -> Login
+    -> Logout
+    -> Profile
+        -> Image?
+        -> Text?
+        -> Follow buttom
+    -> Feed
+        -> User's feed only?
+        -> User + who they follow
+
+2. Tweets 
+    -> Creating
+        -> Text
+        -> Image
+        -> Video
+    -> Retweeting
+    -> Deleting
+
+3. Following / Followers
+
+Long term todos
+- Notifications
+- Directs messages
+- Explore
