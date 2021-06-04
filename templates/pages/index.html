@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Welcome to twitterclone</h1>
+<div class="row">
+    <div class="col">
+        <h1>Welcome to twitterclone</h1>
+    </div>
+</div>
+
 <div id="tweets">
     Replace me
 </div>
@@ -19,7 +24,7 @@
     };
 
     function formatTweetElement(tweet) {
-        var formatedTweet = "<div class='mb-4 tweet' id='" + tweet.id 
+        var formatedTweet = "<div class='col-12 border py-3 mb-4 tweet' id='" + tweet.id 
         +"<p>" + tweet.content + 
             "</p><div class='btn-group'>" + LikeBtn(tweet) +
         "</div></div>";
