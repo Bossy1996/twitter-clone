@@ -10,9 +10,19 @@
     const xhr = new XMLHttpRequest()
     const method = "GET";
     const url = "/tweets";
+    function handleDidLike(tweet_id, current_count) {
+        console.log(tweet_id, current_count);
+    };
+
+    function LikeBtn(tweet) {
+        return "<buttom class='btn btn-primary' onClick=handleDidLike(" + tweet.id + ", " + tweet.likes +")>Like</buttom>"
+    };
 
     function formatTweetElement(tweet) {
-        var formatedTweet = "<div class='mb-4'><h2>" + tweet.id + "</h2>" + "<p>" + tweet.content + "<p></div>";
+        var formatedTweet = "<div class='mb-4 tweet' id='" + tweet.id 
+        +"<p>" + tweet.content + 
+            "</p><div class='btn-group'>" + LikeBtn(tweet) +
+        "</div></div>";
         return formatedTweet;
     };
 
