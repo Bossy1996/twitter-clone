@@ -7,19 +7,30 @@
 </div>
 <script>
     const tweetsElement = document.getElementById("tweets"); // gets a html element
-    tweetsElement.innerHTML = 'LOADING...'; // sets new html element
-
-    
     const xhr = new XMLHttpRequest()
     const method = "GET";
     const url = "/tweets";
+
+    function formatTweetElement(tweet) {
+        var formatedTweet = "<div class='mb-4'><h2>" + tweet.id + "</h2>" + "<p>" + tweet.content + "<p></div>";
+        return formatedTweet;
+    };
+
     const responseType = "json";
     xhr.responseType = responseType;
     xhr.open(method, url);
     xhr.onload = function() {
-        console.log(xhr.response);
         const serverResponse = xhr.response
-        var listedItems = serverResponse.response;
+        const listedItems = serverResponse.response;
+        var finalTweetStr = ""
+        var i;
+        for (i = 0; i < listedItems.length; i++) {
+            var tweetObj = listedItems[i]; 
+            var currentItem = formatTweetElement(tweetObj);
+            finalTweetStr += currentItem;
+        };
+        tweetsElement.innerHTML = finalTweetStr;
+        console.log(xhr.response);
     };
     xhr.send();
 </script>
