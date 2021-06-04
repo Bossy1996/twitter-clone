@@ -26,7 +26,7 @@ def tweet_list_view(request, *args, **kwargs):
     return json data
     """
     qs = Tweet.objects.all()
-    tweet_list = [{"id": x.id, "content": x.content, "likes": random.randint(0, 10000000)} for x in qs]
+    tweet_list = [{"id": x.id, "content": x.content, "likes": random.randint(0, 10000000)} for x in qs] # the like is a place holder it has to change to a database field
     data = {
         "isUser": False,
         "response": tweet_list
