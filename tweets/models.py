@@ -6,6 +6,9 @@ class Tweet(models.Model):
     id = models.AutoField(primary_key=True)
     content = models.TextField()
     media = models.FileField(upload_to='media/', blank=True, null=True)
+
+    class Meta:
+        ordering = ['-id']
     
     def serialize(self):
         return {
