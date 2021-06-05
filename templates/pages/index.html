@@ -9,7 +9,7 @@
 
 <div class="row">
     <div class="col-md-4 mx-auto col-10">
-        <form class="form" action="/create-tweet" method="post">
+        <form class="form" id="tweet-create-form" action="/create-tweet" method="post">
             {% csrf_token %}
             <input type="hidden" value="/" name="next" id="">
             <textarea class="form-control" name="content" placeholder="What's happening..."></textarea>
