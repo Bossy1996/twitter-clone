@@ -18,7 +18,7 @@ def tweet_create_view(request, *args, **kargs):
         obj = form.save(commit=False)
         obj.save()
         form = TweetForm()
-    return render(request, "pages/index.html", context={"form": form}, status=200)
+    return render(request, 'components/form.html', context={"form": form}, status=200)
 
 def tweet_list_view(request, *args, **kwargs):
     """
