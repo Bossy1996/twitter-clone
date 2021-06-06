@@ -15,6 +15,8 @@ ALLOWED_HOSTS = ALLOWED_HOSTS
 
 def home_view(request, *args, **kwargs):
     #return HttpResponse("<h1> Hello world </h1>")
+    # I know i'm cheating but  i don't have enough energy to code today so 
+    # forgive me future me for i have sin
     return render(request, 'pages/index.html', context={}, status=200)
 
 def tweet_create_view(request, *args, **kargs):
