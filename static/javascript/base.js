@@ -1,12 +1,14 @@
 const tweetCreateFormEl = document.getElementById("tweet-create-form")
 
 function handleTweetFormError(msg, display) {
+    let myErrorDiv = document.getElementById("tweet-create-form-error")
     if (display === true) {
         // Show error
-        let myErrorDiv = document.getElementById("tweet-create-form-error")
+        myErrorDiv.setAttribute("class", "d-block alert alert-danger")
         myErrorDiv.innerText = msg 
     } else {
         // hide the error
+        myErrorDiv.setAttribute("class", "d-none alert alert-danger")
     }
 }
 
@@ -37,6 +39,11 @@ function handleTweetCreateFormDidSubmit(event) {
             let contentErrorMsg;
             if (contentError) {
                 contentErrorMsg = contentError[0]
+                if (contentErrorMsg) {
+                    handleTweetFormError(contentErrorMsg, true)
+                } else {
+                    alert("An error ocurred please try again")
+                }
             } else {
                 alert("An error ocurred please try again")
             }
