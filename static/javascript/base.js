@@ -1,20 +1,51 @@
-const tweetElement = document.getElementById("tweet");
-tweetElement.innerHTML = "it's been replaced";
-const xhr = new XMLHttpRequest();
-const method = "GET";
-const url = "/tweet";
-const responseType = "json";
+const tweetCreateFormEl = document.getElementById("tweet-create-form")
 
-xhr.responseType = responseType;
-xhr.open(method, url);
-xhr.onload = () => {
-    const serverResponse = xhr.response;
-    const listedItems = serverResponse.response;
-    var finalTweetStr = "";
-    var i;
-    for (i = 0; i < listedItems.lenght; i++) {
-        tweetElement.innerHTML = finalTweetStr;
-        console.log(xhr.response);
-    };
-};
-xhr.send();
+function handleTweetCreateFormDidSubmit(event) {
+    event.preventDefault()
+}
+tweetCreateFormEl.addEventListener("submit", handleTweetCreateFormDidSubmit)
+
+
+const tweetsEl = document.getElementById("tweets");
+
+const loadTweets =(tweetsElement) => {
+    const xhr = new XMLHttpRequest();
+    const method = "GET";
+    const url = "/tweet";
+    const responseType = "json";
+    xhr.responseType = responseType;
+    xhr.open(method, url);
+    xhr.onload = () => {
+        const serverResponse = xhr.response;
+        const listedItems = serverResponse.response;
+        var finalTweetStr = "";
+        var i;
+        for (i=0; i<listedItems.length; i++) {
+            tweetObj = listedItems[i]
+            let currentItem = formatTweetElement(tweetObj)
+                finalTweetStr += currentItem
+    }
+    tweetsElement.innerHTML = finalTweetStr
+    // console.log(listedItems)
+  };
+    xhr.send();
+}
+loadTweets(tweetsEl)
+
+
+
+function handleDidLike(tweet_id, currentCount) {
+    console.log(tweet_id, currentCount)
+}
+
+function LikeBtn(tweet){
+    return "<buttom class='btn btn-small btn-primary' onClick=handleDidLike(" + tweet.id +"," + tweet.likes + ")>"+ tweet.likes +" Like</buttom>"
+}
+
+function formatTweetElement(tweet) {
+    let formatedTweet = "<div class='col-12 col-md-10 mx-auto mb-4 border rounded py-3' id='tweet-"+ tweet.id 
+    +"'>" + "<p>" + tweet.content + 
+        "</p><div class='btn-group'>" + LikeBtn(tweet) +
+        "</div></div>";
+    return formatedTweet
+}
