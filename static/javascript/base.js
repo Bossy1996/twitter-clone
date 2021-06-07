@@ -20,6 +20,7 @@ function handleTweetCreateFormDidSubmit(event) {
             console.log(newTweetElement)
             const ogHhtml = tweetsContainerElemet.innerHTML
             tweetsContainerElemet.innerHTML = newTweetElement + ogHhtml
+            myForm.reset()
         }
         
     }
