@@ -29,8 +29,19 @@
     const url = "/tweet";
     const responseType = "json";
 
+    function handleDidLike(tweet_id, currentCount) {
+        console.log(tweet_id, currentCount)
+    }
+
+    function LikeBtn(tweet){
+        return "<buttom class='btn btn-small btn-primary' onClick=handleDidLike(" + tweet.id +"," + tweet.likes + ")>"+ tweet.likes +" Like</buttom>"
+    }
+
     function formatTweetElement(tweet) {
-        let formatedTweet = "<div class='mb-4'><h1>" + tweet.id + "</h1>" + "<p>" + tweet.content + "</p> </div>";
+        let formatedTweet = "<div class='mb-4' id='tweet-"+ tweet.id 
+        +"'>" + "<p>" + tweet.content + 
+            "</p><div class='btn-group'>" + LikeBtn(tweet) +
+            "</div></div>";
         return formatedTweet
     }
     xhr.responseType = responseType;
