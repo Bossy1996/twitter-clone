@@ -8,9 +8,12 @@ function handleTweetCreateFormDidSubmit(event) {
     const method = myForm.getAttribute("method")
     const xhr = new XMLHttpRequest()
     xhr.open(method, url)
+    xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")
+    xhr.setRequestHeader("X-Requested_With", "XMLHttpRequest")
     xhr.onload = () => {
         const serverResponse = xhr.response
-        console.log(serverResponse)
+        const tweetEl = document.getElementById("tweets")
+        loadTweets(tweetEl)
     }
     xhr.send(myFormData)
 
