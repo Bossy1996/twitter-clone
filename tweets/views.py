@@ -38,7 +38,7 @@ def tweet_list_view(request, *args, **kwargs):
     return json data
     """
     qs = Tweet.objects.all()
-    tweet_list = [x.serialize() for x in qs] # the like is a place holder it has to change to a database field
+    tweet_list = [x.serialize() for x in qs]
     data = {
         "isUser": False,
         "response": tweet_list
