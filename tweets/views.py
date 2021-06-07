@@ -3,7 +3,7 @@ from django.http.response import Http404
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404, JsonResponse
 from django.utils.http import is_safe_url
-from django.conf.global_settings import ALLOWED_HOSTS
+from django.conf.global_settings import ALLOWED_HOSTS, LOGIN_URL
 
 from .forms import TweetForm
 from .models import Tweet
@@ -17,17 +17,26 @@ def home_view(request, *args, **kwargs):
     #return HttpResponse("<h1> Hello world </h1>")
     # I know i'm cheating but  i don't have enough energy to code today so 
     # forgive me future me for i have sin
-    return render(request, 'pages/index.html', context={}, status=200)
+    if request.user.is_authenticated:
+        return render(request, 'pages/index.html', context={}, status=200)
+    return render(request, LOGIN_URL, context={}, status=401)
 
 def tweet_create_view(request, *args, **kargs):
     """
     Tweet creation view.
     Returns Json data
     """
+    user = request.user
+    if not request.user.is_authenticated:
+        user = None
+        if request.is_ajax():
+            return JsonResponse({}, status=401)
+        return redirect(LOGIN_URL)
     form = TweetForm(request.POST or None)
     next_url = request.POST.get("next") or None
     if form.is_valid():
         obj = form.save(commit=False)
+        obj.user = user
         obj.save()
         if request.is_ajax():
             return JsonResponse(obj.serialize(), status=201)
