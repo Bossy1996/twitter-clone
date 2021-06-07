@@ -20,6 +20,10 @@ def home_view(request, *args, **kwargs):
     return render(request, 'pages/index.html', context={}, status=200)
 
 def tweet_create_view(request, *args, **kargs):
+    """
+    Tweet creation view.
+    Returns Json data
+    """
     form = TweetForm(request.POST or None)
     next_url = request.POST.get("next") or None
     if form.is_valid():

@@ -21,8 +21,16 @@ function handleTweetCreateFormDidSubmit(event) {
             const ogHhtml = tweetsContainerElemet.innerHTML
             tweetsContainerElemet.innerHTML = newTweetElement + ogHhtml
             myForm.reset()
+        } else if (xhr.status === 400) {
+            const errorJson = xhr.response
+            console.log(errorJson)
+        } else if (xhr.status === 500) {
+            alert("There was a server error, please try again later")
         }
         
+    }
+    xhr.onerror = () => {
+        alert("An error ocurred. Please try again later")
     }
     xhr.send(myFormData)
 
