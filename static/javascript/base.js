@@ -23,6 +23,13 @@ function handleTweetCreateFormDidSubmit(event) {
             myForm.reset()
         } else if (xhr.status === 400) {
             const errorJson = xhr.response
+            const contentError = errorJson.content
+            let contentErrorMsg;
+            if (contentError) {
+                contentErrorMsg = contentError[0]
+            } else {
+                alert("An error ocurred please try again")
+            }
             console.log(errorJson)
         } else if (xhr.status === 500) {
             alert("There was a server error, please try again later")
