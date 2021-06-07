@@ -29,26 +29,24 @@
     const url = "/tweet";
     const responseType = "json";
 
-    function handleDidLike(tweet_id, current_count) {
-        console.log(tweet_id, current_count);
-    };
-
-    function LikeBtn(tweet) {
-        return "<buttom class='btn btn-primary' onClick=handleDidLike(" + tweet.id +", " + tweet.likes +")>Like</buttom>"
-    };
-
-    function formatedTweetElement(tweet) {
-        var formatedTweet = "<div class='col-12 border py-3 mb-4 tweet'>" + tweet.id + "<p>" + tweet.content 
-            +"</p><div class='btn-group'>" + LikeBtn(tweet) + "</div></div>";
-        return formatedTweet;
-    };
-
+    function formatTweetElement(tweet) {
+        let formatedTweet = "<div class='mb-4'><h1>" + tweet.id + "</h1>" + "<p>" + tweet.content + "</p> </div>";
+        return formatedTweet
+    }
     xhr.responseType = responseType;
     xhr.open(method, url);
     xhr.onload = () => {
         const serverResponse = xhr.response;
         const listedItems = serverResponse.response;
-        console.log(listedItems)
+        var finalTweetStr = "";
+        var i;
+        for (i=0; i<listedItems.length; i++) {
+            tweetObj = listedItems[i]
+            let currentItem = formatTweetElement(tweetObj)
+                finalTweetStr += currentItem
+        }
+        tweetsElement.innerHTML = finalTweetStr
+        // console.log(listedItems)
     };
     xhr.send();
 </script>
