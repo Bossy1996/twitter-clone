@@ -1,14 +1,42 @@
 const tweetCreateFormEl = document.getElementById("tweet-create-form")
 
 function handleTweetCreateFormDidSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
+    const myForm = event.target
+    const myFormData = new FormData(myForm)
+    const url = myForm.getAttribute("action")
+    const method = myForm.getAttribute("method")
+    const xhr = new XMLHttpRequest()
+    xhr.open(method, url)
+    xhr.onload = () => {
+        const serverResponse = xhr.response
+        console.log(serverResponse)
+    }
+    xhr.send(myFormData)
+
 }
 tweetCreateFormEl.addEventListener("submit", handleTweetCreateFormDidSubmit)
 
 
 const tweetsEl = document.getElementById("tweets");
 
-const loadTweets =(tweetsElement) => {
+function handleDidLike(tweet_id, currentCount) {
+    console.log(tweet_id, currentCount)
+}
+
+function LikeBtn(tweet){
+    return "<buttom class='btn btn-small btn-primary' onClick=handleDidLike(" + tweet.id +"," + tweet.likes + ")>"+ tweet.likes +" Like</buttom>"
+}
+
+function formatTweetElement(tweet) {
+    let formatedTweet = "<div class='col-12 col-md-10 mx-auto mb-4 border rounded py-3' id='tweet-"+ tweet.id 
+    +"'>" + "<p>" + tweet.content + 
+        "</p><div class='btn-group'>" + LikeBtn(tweet) +
+        "</div></div>";
+    return formatedTweet
+}
+
+const loadTweets = (tweetsElement) => {
     const xhr = new XMLHttpRequest();
     const method = "GET";
     const url = "/tweet";
@@ -31,21 +59,3 @@ const loadTweets =(tweetsElement) => {
     xhr.send();
 }
 loadTweets(tweetsEl)
-
-
-
-function handleDidLike(tweet_id, currentCount) {
-    console.log(tweet_id, currentCount)
-}
-
-function LikeBtn(tweet){
-    return "<buttom class='btn btn-small btn-primary' onClick=handleDidLike(" + tweet.id +"," + tweet.likes + ")>"+ tweet.likes +" Like</buttom>"
-}
-
-function formatTweetElement(tweet) {
-    let formatedTweet = "<div class='col-12 col-md-10 mx-auto mb-4 border rounded py-3' id='tweet-"+ tweet.id 
-    +"'>" + "<p>" + tweet.content + 
-        "</p><div class='btn-group'>" + LikeBtn(tweet) +
-        "</div></div>";
-    return formatedTweet
-}
