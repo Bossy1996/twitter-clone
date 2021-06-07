@@ -1,1 +1,0 @@
-const tweetElement = document.getElementById("tweets");
