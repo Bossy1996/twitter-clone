@@ -1,7 +1,8 @@
-const tweetElement = document.getElementById("tweets");
+const tweetElement = document.getElementById("tweet");
+tweetElement.innerHTML = "it's been replaced";
 const xhr = new XMLHttpRequest();
 const method = "GET";
-const url = "/tweets";
+const url = "/tweet";
 const responseType = "json";
 
 xhr.responseType = responseType;
