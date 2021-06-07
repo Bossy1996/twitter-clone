@@ -1,5 +1,15 @@
 const tweetCreateFormEl = document.getElementById("tweet-create-form")
 
+function handleTweetFormError(msg, display) {
+    if (display === true) {
+        // Show error
+        let myErrorDiv = document.getElementById("tweet-create-form-error")
+        myErrorDiv.innerText = msg 
+    } else {
+        // hide the error
+    }
+}
+
 function handleTweetCreateFormDidSubmit(event) {
     event.preventDefault();
     const myForm = event.target
