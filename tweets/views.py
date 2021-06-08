@@ -1,9 +1,4 @@
-from twitterclone.settings import ALLOWED_HOSTS
-from django.http.response import Http404
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, Http404, JsonResponse
-from django.utils.http import is_safe_url
-from django.conf.global_settings import ALLOWED_HOSTS #, LOGIN_URL
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
