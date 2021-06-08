@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.authentication import SessionAuthentication
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
@@ -24,6 +25,7 @@ def home_view(request, *args, **kwargs):
 
 @api_view(['POST']) # http method the client === POST
 @permission_classes([IsAuthenticated])
+@authentication_classes([SessionAuthentication])
 def tweet_create_view(request, *args, **kwargs):
     serializer = TweetSerializer(data=request.POST)
     if serializer.is_valid(raise_exception=True):
