@@ -35,7 +35,11 @@ LOGIN_URL = '/login/'
 # Application definition
 
 INSTALLED_APPS = [
+    # internal
     'tweets',
+    # third-party
+    'rest_framework',
+    # django-apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
