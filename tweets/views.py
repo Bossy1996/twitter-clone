@@ -3,13 +3,14 @@ from django.http.response import Http404
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404, JsonResponse
 from django.utils.http import is_safe_url
-from django.conf.global_settings import ALLOWED_HOSTS, LOGIN_URL
+from django.conf.global_settings import ALLOWED_HOSTS #, LOGIN_URL
 
 from .forms import TweetForm
 from .models import Tweet
 import random
 
-ALLOWED_HOSTS = ALLOWED_HOSTS
+#ALLOWED_HOSTS = ALLOWED_HOSTS
+LOGIN_URL = '/login'
 
 # Create your views here.
 
@@ -19,7 +20,7 @@ def home_view(request, *args, **kwargs):
     # forgive me future me for i have sin
     if request.user.is_authenticated:
         return render(request, 'pages/index.html', context={}, status=200)
-    return render(request, LOGIN_URL, context={}, status=401)
+    return redirect(LOGIN_URL)
 
 def tweet_create_view(request, *args, **kargs):
     """
