@@ -51,6 +51,9 @@ function handleTweetCreateFormDidSubmit(event) {
         } else if (xhr.status === 401) {
             alert("You must be logged in")
             window.location.href = "/login"
+        } else if (xhr.status === 403) {
+            alert("You must be logged in")
+            window.location.href = "/login"
         } else if (xhr.status === 500) {
             alert("There was a server error, please try again later")
         }
