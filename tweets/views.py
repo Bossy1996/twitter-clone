@@ -25,7 +25,7 @@ def home_view(request, *args, **kwargs):
 
 @api_view(['POST']) # http method the client === POST
 @permission_classes([IsAuthenticated])
-@authentication_classes([SessionAuthentication])
+# @authentication_classes([SessionAuthentication])
 def tweet_create_view(request, *args, **kwargs):
     serializer = TweetSerializer(data=request.POST)
     if serializer.is_valid(raise_exception=True):
@@ -38,6 +38,19 @@ def tweet_list_view(request, *args, **kwargs):
     qs = Tweet.objects.all()
     serializer = TweetSerializer(qs, many=True)
     return Response(serializer.data)
+
+@api_view(['DELETE', 'POST']) # http method the client === GET
+@permission_classes([IsAuthenticated])
+def tweet_delete_view(request, tweet_id, *args, **kwargs):
+    qs = Tweet.objects.filter(id=tweet_id)
+    if not qs.exists():
+        return Response({}, status=404)
+    qs = qs.filter(user=request.user)
+    if not qs.exists():
+        return Response({"message": "You have no permissions to delete this tweet"}, status=401)
+    obj = qs.first()
+    obj.delete()
+    return Response({"message": "Tweet deleted succesfully"}, status=200)
 
 @api_view(['GET']) # http method the client === GET
 def tweet_detail_view(request, tweet_id, *args, **kwargs):
