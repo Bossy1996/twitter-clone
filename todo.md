@@ -16,7 +16,7 @@
         -> Image / Video -> Media storage server
     -> Retweeting
     -> Deleting
-    -> Liking
+    -> Liking or Unliking
 
 3. Following / Followers
 
