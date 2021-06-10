@@ -17,9 +17,13 @@ class TweetActionSerializer(serializers.Serializer):
         return value
 
 class TweetSerializer(serializers.ModelSerializer):
+    likes = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = Tweet
-        fields = ['content']
+        fields = ['id', 'content', 'likes']
+
+    def get_likes(self, object):
+        return object.likes.count()
 
     def validate(self, value):
         # content = self.cleaned_data.get("content")
