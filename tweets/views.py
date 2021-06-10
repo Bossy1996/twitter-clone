@@ -16,9 +16,6 @@ LOGIN_URL = '/login'
 # Create your views here.
 
 def home_view(request, *args, **kwargs):
-    #return HttpResponse("<h1> Hello world </h1>")
-    # I know i'm cheating but  i don't have enough energy to code today so 
-    # forgive me future me for i have sin
     if request.user.is_authenticated:
         return render(request, 'pages/index.html', context={}, status=200)
     return redirect(LOGIN_URL)
