@@ -87,13 +87,13 @@ function getCookie(name) {
 }
 
 
-function handleDidLike(tweet_id, currentCount) {
+function handleDidLike(tweet_id, currentCount, action) {
     console.log(tweet_id, currentCount)
     const url = "api/tweet/action"
     const mehtod = "POST"
     data = JSON.stringify({
         id: tweet_id,
-        action: "like"
+        action: action
     })
     const xhr = new XMLHttpRequest()
     const csrftoken = getCookie('csrftoken');
@@ -108,14 +108,20 @@ function handleDidLike(tweet_id, currentCount) {
     xhr.send(data)
 }
 
+function UnLikeBtn(tweet){
+    return "<buttom class='btn btn-small btn-primary' onClick=handleDidLike(" + tweet.id +"," + tweet.likes,  + ",'unlike')>UnLike</buttom>"
+}
+
 function LikeBtn(tweet){
-    return "<buttom class='btn btn-small btn-primary' onClick=handleDidLike(" + tweet.id +"," + tweet.likes + ")>"+ tweet.likes +" Like</buttom>"
+    return "<buttom class='btn btn-small btn-primary' onClick=handleDidLike(" + tweet.id +"," + tweet.likes,  + ",'like')>"+ tweet.likes +" Like</buttom>"
 }
 
 function formatTweetElement(tweet) {
     let formatedTweet = "<div class='col-12 col-md-10 mx-auto mb-4 border rounded py-3' id='tweet-"+ tweet.id 
     +"'>" + "<p>" + tweet.content + 
-        "</p><div class='btn-group'>" + LikeBtn(tweet) +
+        "</p><div class='btn-group'>" + 
+            LikeBtn(tweet) +
+            UnLikeBtn(tweet) + 
         "</div></div>";
     return formatedTweet
 }
