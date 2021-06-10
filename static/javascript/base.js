@@ -70,8 +70,42 @@ tweetCreateFormEl.addEventListener("submit", handleTweetCreateFormDidSubmit)
 
 const tweetsContainerElemet = document.getElementById("tweets");
 
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
 function handleDidLike(tweet_id, currentCount) {
     console.log(tweet_id, currentCount)
+    const url = "api/tweet/action"
+    const mehtod = "POST"
+    data = JSON.stringify({
+        id: tweet_id,
+        action: "like"
+    })
+    const xhr = new XMLHttpRequest()
+    const csrftoken = getCookie('csrftoken');
+    xhr.open(method, url)
+    xhr.setRequestHeader("Content-Type", "application/json")
+    xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")
+    xhr.setRequestHeader("X-Requested_With", "XMLHttpRequest")
+    xhr.setRequestHeader("X-CSRFToken", csrftoken)
+    xhr.onload(() => {
+        loadTweets(tweetsContainerElemet)
+    })
+    xhr.send(data)
 }
 
 function LikeBtn(tweet){

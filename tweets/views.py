@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from rest_framework import response
 
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.decorators import action, api_view, permission_classes, authentication_classes
@@ -65,7 +66,7 @@ def tweet_action_view(request, *args, **kwargs):
     Id is required.
     Actions options are: like, unlike, retweet
     """
-    serializer = TweetActionSerializer(data=request.POST)
+    serializer = TweetActionSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         data = serializer.validated_data
         tweet_id = data.get("id")
@@ -77,9 +78,11 @@ def tweet_action_view(request, *args, **kwargs):
         obj = qs.first()
         if action == "like":
             obj.likes.add(request.user)
+            serializer = TweetSerializer(obj)
+            return Response(serializer.data, status=200)
         elif action == "unlike":
             obj.likes.remove(request.user)
         elif action == "retweet":
             # TODO
             pass
-    return Response({"message": "Tweet action"}, status=200)
+    return Response({}, status=200)
