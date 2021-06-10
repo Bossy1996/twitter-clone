@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 
 from rest_framework.authentication import SessionAuthentication
-from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.decorators import action, api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from .forms import TweetForm
 from .models import Tweet
-from .serializers import TweetSerializer
+from .serializers import TweetSerializer, TweetActionSerializer
 import random
 
 #ALLOWED_HOSTS = ALLOWED_HOSTS
@@ -57,3 +57,29 @@ def tweet_detail_view(request, tweet_id, *args, **kwargs):
     obj = qs.first()
     serializer = TweetSerializer(obj)
     return Response(serializer.data)
+
+@api_view(['POST']) # http method the client === GET
+@permission_classes([IsAuthenticated])
+def tweet_action_view(request, *args, **kwargs):
+    """
+    Id is required.
+    Actions options are: like, unlike, retweet
+    """
+    serializer = TweetActionSerializer(request.POST)
+    if serializer.is_valid(raise_exception=True):
+        data = serializer.validated_data
+        tweet_id = data.get("id")
+        action = data.get("action")
+
+        qs = Tweet.objects.filter(id=tweet_id)
+        if not qs.exists():
+            return Response({}, status=404)
+        obj = qs.first()
+        if action == "like":
+            obj.likes.add(request.user)
+        elif action == "unlike":
+            obj.likes.remove(request.user)
+        elif action == "retweet":
+            # TODO
+            pass
+    return Response({"message": "Tweet action"}, status=200)
