@@ -9,13 +9,15 @@ from .views import (
     tweet_action_view
 )
 
+"""
+CLIENT
+Base ENDPOINT /api/tweets
+"""
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', home_view),
-    path('tweet/', tweet_list_view),
-    path('tweet/<int:tweet_id>', tweet_detail_view),
-    path('create-tweet', tweet_create_view),
-    path('login/', tweet_list_view),
-    path('api/tweet/<int:tweet_id>/delete', tweet_delete_view),
-    path('api/tweet/action', tweet_action_view),
+    path('', tweet_list_view),
+    path('action/', tweet_action_view),
+    path('create/', tweet_create_view),
+    path('<int:tweet_id>', tweet_detail_view),
+    path('<int:tweet_id>/delete', tweet_delete_view),
 ]
