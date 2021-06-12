@@ -87,7 +87,7 @@ function getCookie(name) {
 }
 
 
-function handleDidLike(tweet_id, currentCount, action) {
+function handleTwetAction(tweet_id, currentCount, action) {
     console.log(tweet_id, currentCount)
     const url = "api/tweet/action"
     const mehtod = "POST"
@@ -109,15 +109,15 @@ function handleDidLike(tweet_id, currentCount, action) {
 }
 
 function Retweet(tweet){
-    return "<buttom class='btn btn-small btn-outline-success' onClick=handleDidLike(" + tweet.id +"," + tweet.likes,  + ",'Retweet')>Retweet</buttom>"
+    return "<buttom class='btn btn-small btn-outline-success' onClick=handleTwetAction(" + tweet.id +"," + tweet.likes,  + ",'Retweet')>Retweet</buttom>"
 }
 
 function UnLikeBtn(tweet){
-    return "<buttom class='btn btn-small btn-outline-primary' onClick=handleDidLike(" + tweet.id +"," + tweet.likes,  + ",'like')>Unlike</buttom>"
+    return "<buttom class='btn btn-small btn-outline-primary' onClick=handleTwetAction(" + tweet.id +"," + tweet.likes,  + ",'like')>Unlike</buttom>"
 }
 
 function LikeBtn(tweet){
-    return "<buttom class='btn btn-small btn-primary' onClick=handleDidLike(" + tweet.id +"," + tweet.likes,  + ",'like')>"+ tweet.likes +" Like</buttom>"
+    return "<buttom class='btn btn-small btn-primary' onClick=handleTwetAction(" + tweet.id +"," + tweet.likes,  + ",'like')>"+ tweet.likes +" Like</buttom>"
 }
 
 function formatTweetElement(tweet) {
