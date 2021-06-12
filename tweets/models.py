@@ -2,7 +2,6 @@ from re import T
 from django.db import models
 from django.conf.global_settings import AUTH_USER_MODEL
 
-import random
 # Create your models here.
 User = AUTH_USER_MODEL
 
@@ -25,3 +24,7 @@ class Tweet(models.Model):
 
     def __str__(self):
         return self.content
+
+    @property
+    def is_retweet(self):
+        return self.parent != None

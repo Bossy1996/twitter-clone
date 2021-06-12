@@ -1,3 +1,4 @@
+from re import T
 from django.db import models
 from rest_framework import fields, serializers
 from rest_framework.decorators import action
@@ -38,10 +39,16 @@ class TweetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tweet
-        fields = ['id', 'content', 'likes']
+        fields = ['id', 'content', 'likes', 'is_retweet']
 
     def get_likes(self, object):
         return object.likes.count()
     
     def get_content(self, object):
+        
+        content = object.content
+
+        if object.is_retweet:
+            content = object.parent.content
+        
         return object.content
