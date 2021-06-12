@@ -15,8 +15,10 @@
         -> Text
         -> Image / Video -> Media storage server
     -> Retweeting
+        -> Read only serializer
+        -> Create only serializer
     -> Deleting
-    -> Liking or Unliking
+    -> Liking or Unliking - Only one buttom
 
 3. Following / Followers
 
