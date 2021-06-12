@@ -109,7 +109,7 @@ function handleDidLike(tweet_id, currentCount, action) {
 }
 
 function UnLikeBtn(tweet){
-    return "<buttom class='btn btn-small btn-primary' onClick=handleDidLike(" + tweet.id +"," + tweet.likes,  + ",'unlike')>UnLike</buttom>"
+    return "<buttom class='btn btn-small btn-outline-primary' onClick=handleDidLike(" + tweet.id +"," + tweet.likes,  + ",'like')>Like</buttom>"
 }
 
 function LikeBtn(tweet){
