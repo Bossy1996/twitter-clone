@@ -108,8 +108,12 @@ function handleDidLike(tweet_id, currentCount, action) {
     xhr.send(data)
 }
 
+function Retweet(tweet){
+    return "<buttom class='btn btn-small btn-outline-primary' onClick=handleDidLike(" + tweet.id +"," + tweet.likes,  + ",'Retweet')>Retweet</buttom>"
+}
+
 function UnLikeBtn(tweet){
-    return "<buttom class='btn btn-small btn-outline-primary' onClick=handleDidLike(" + tweet.id +"," + tweet.likes,  + ",'like')>Like</buttom>"
+    return "<buttom class='btn btn-small btn-outline-primary' onClick=handleDidLike(" + tweet.id +"," + tweet.likes,  + ",'like')>Unlike</buttom>"
 }
 
 function LikeBtn(tweet){
@@ -122,6 +126,7 @@ function formatTweetElement(tweet) {
         "</p><div class='btn-group'>" + 
             LikeBtn(tweet) +
             UnLikeBtn(tweet) + 
+            Retweet(tweet) +
         "</div></div>";
     return formatedTweet
 }
