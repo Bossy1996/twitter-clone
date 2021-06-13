@@ -8,3 +8,6 @@ User = get_user_model()
 class TweetTestCase(TestCase):
     def setUp(self):
         User.objects.create_user(username='abc', password='somepassword')
+
+# this is a cheat comment because it's too hot outside, and I'm broken mentally i can't even get out of my bed.
+# sorry for this but i trully can't.
