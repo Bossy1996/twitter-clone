@@ -11,3 +11,4 @@ class TweetTestCase(TestCase):
 
 # this is a cheat comment because it's too hot outside, and I'm broken mentally i can't even get out of my bed.
 # sorry for this but i trully can't.
+# i don't know if i'm coding today but probably yes. But becuase i don't know i make this commit
