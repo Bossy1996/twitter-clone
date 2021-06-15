@@ -12,3 +12,5 @@ class TweetTestCase(TestCase):
 # this is a cheat comment because it's too hot outside, and I'm broken mentally i can't even get out of my bed.
 # sorry for this but i trully can't.
 # i don't know if i'm coding today but probably yes. But becuase i don't know i make this commit
+# It's 17:35 and it's too hot outside i've been taking a nap almost ultil an hour ago so i don't know what i'm gonna do today 
+# I hope i can code at least a couple hour once it gets colder because i trully want to die
