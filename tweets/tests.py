@@ -11,10 +11,12 @@ class TweetTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='def', password='somepassword')
         Tweet.objects.create(content="My first tweet", user=self.user)
+        Tweet.objects.create(content="My first tweet", user=self.user)
+        Tweet.objects.create(content="My first tweet", user=self.user)
 
     def test_tweet_created(self):
         tweet = Tweet.objects.create(content="My second tweet", user=self.user)
-        self.assertEqual(tweet.id, 2)
+        self.assertEqual(tweet.id, 4)
         self.assertEqual(tweet.user, self.user)
 
     def get_client(self):
@@ -26,4 +28,13 @@ class TweetTestCase(TestCase):
         client = self.get_client()
         response = client.get("/api/tweets/")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.json()))
+        self.assertEqual(len(response.json()), 1)
+
+    def test_tweet_list(self):
+        client = self.get_client()
+        response = client.get("/api/tweets/")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json()), 3)
+
+    def test_action(self):
+        pass
