@@ -31,5 +31,5 @@ urlpatterns = [
     path('tweet/', tweet_list_view),
     path('tweet/<int:tweet_id>', tweet_detail_view),
     path('create-tweet', tweet_create_view),
-    path('api/tweets/', include('tweets.url'))
+    path('api/tweets/', include('tweets.urls'))
 ]
