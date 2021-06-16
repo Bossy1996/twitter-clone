@@ -36,5 +36,11 @@ class TweetTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json()), 3)
 
-    def test_action(self):
-        pass
+    def test_action_like(self):
+        client = self.get_client()
+        response = client.post("/api/tweets/action/", {"id": 1, "action": "like"})
+        self.assertEqual(response.status_code, 200)
+        like_count = response.json().get("likes")
+        self.assertEqual(like_count, 1)
+        # print(response.json())
+        # pass
