@@ -9,14 +9,14 @@ from rest_framework.response import Response
 from .forms import TweetForm
 from .models import Tweet
 from .serializers import (
-    TweetSerializer, 
-    TweetActionSerializer, 
+    TweetSerializer,
+    TweetActionSerializer,
     TweetCreateSerializer
 )
 
-
-#ALLOWED_HOSTS = ALLOWED_HOSTS
+# ALLOWED_HOSTS = ALLOWED_HOSTS
 LOGIN_URL = '/login'
+
 
 # Create your views here.
 
@@ -25,7 +25,8 @@ def home_view(request, *args, **kwargs):
         return render(request, 'pages/index.html', context={}, status=200)
     return redirect(LOGIN_URL)
 
-@api_view(['POST']) # http method the client === POST
+
+@api_view(['POST'])  # http method the client === POST
 @permission_classes([IsAuthenticated])
 # @authentication_classes([SessionAuthentication])
 def tweet_create_view(request, *args, **kwargs):
@@ -35,13 +36,15 @@ def tweet_create_view(request, *args, **kwargs):
         return Response(serializer.data, status=201)
     return Response({}, status=400)
 
-@api_view(['GET']) # http method the client === GET
+
+@api_view(['GET'])  # http method the client === GET
 def tweet_list_view(request, *args, **kwargs):
     qs = Tweet.objects.all()
     serializer = TweetSerializer(qs, many=True)
     return Response(serializer.data)
 
-@api_view(['DELETE', 'POST']) # http method the client === GET
+
+@api_view(['DELETE', 'POST'])  # http method the client === GET
 @permission_classes([IsAuthenticated])
 def tweet_delete_view(request, tweet_id, *args, **kwargs):
     qs = Tweet.objects.filter(id=tweet_id)
@@ -54,7 +57,8 @@ def tweet_delete_view(request, tweet_id, *args, **kwargs):
     obj.delete()
     return Response({"message": "Tweet deleted succesfully"}, status=200)
 
-@api_view(['GET']) # http method the client === GET
+
+@api_view(['GET'])  # http method the client === GET
 def tweet_detail_view(request, tweet_id, *args, **kwargs):
     qs = Tweet.objects.filter(id=tweet_id)
     if not qs.exists():
@@ -63,7 +67,8 @@ def tweet_detail_view(request, tweet_id, *args, **kwargs):
     serializer = TweetSerializer(obj)
     return Response(serializer.data)
 
-@api_view(['POST']) # http method the client === GET
+
+@api_view(['POST'])  # http method the client === GET
 @permission_classes([IsAuthenticated])
 def tweet_action_view(request, *args, **kwargs):
     """
