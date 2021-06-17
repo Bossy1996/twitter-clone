@@ -34,7 +34,7 @@ export function TweetsComponent(props) {
 }
 
 export function TweetsList(props) {
-    const [tweetsInit, setTweetsInit] = useState([]);
+    const [tweetsInit, setTweetsInit] = useState(props.newTweets ? props.newTweets: []);
     const [tweets, setTweets] = useState([])
     // setTweetsInit([...props.newTweets].concat(tweetsInit))
     useEffect(() => {
@@ -49,13 +49,14 @@ export function TweetsList(props) {
      const myCallback = (response, status) => {
        console.log(response, status)
        if (status === 200) {
-        setTweetsInit(response) 
+           const finalTweetsInit = [...response].concat(tweetsInit)
+        setTweetsInit(finalTweetsInit) 
        } else {
          alert("There was an error")
        }
     }
      loadTweets(myCallback)
-    }, [])
+    }, [tweetsInit])
     return tweets.map((item, index) => {
       return <Tweet tweet={item} className='my-5 py-5 boder bg-white text-dark' key={`${index}-{item.id}`} />
     })
