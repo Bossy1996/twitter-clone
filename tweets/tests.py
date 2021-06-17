@@ -12,9 +12,10 @@ User = get_user_model()
 class TweetTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='def', password='somepassword')
+        self.userb = User.objects.create_user(username='def-2', password='somepassword2')
         Tweet.objects.create(content="My first tweet", user=self.user)
         Tweet.objects.create(content="My first tweet", user=self.user)
-        Tweet.objects.create(content="My first tweet", user=self.user)
+        Tweet.objects.create(content="My first tweet", user=self.userb)
         self.current_count = Tweet.objects.all().count()
 
     def test_tweet_created(self):
@@ -76,6 +77,23 @@ class TweetTestCase(TestCase):
         response_data = response.json()
         new_tweet_id = response_data.get("id")
         self.assertEqual(current_count + 1, new_tweet_id)
-        pass
-        
-        
+
+    def test_detail_api_view(self):
+        client = self.get_client()
+        response = client.get("/api/tweets/1")
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        _id = data.get("id")
+        self.assertEqual(_id, 1)
+
+    def test_delete_api_view(self):
+        client = self.get_client()
+        response = client.delete("/api/tweets/1/delete")
+        self.assertEqual(response.status_code, 200)
+        client = self.get_client()
+        response = client.delete("/api/tweets/1/delete")
+        self.assertEqual(response.status_code, 404)
+
+        # Permission error check
+        response_incorrect_owner = client.delete("/api/tweets/3/delete")
+        self.assertEqual(response_incorrect_owner.status_code, 401)
