@@ -25,8 +25,25 @@ export function TweetsList(props) {
 
 export function ActionBtn(props){
     const {tweet, action} = props
+    const [likes, setLikes] = useState(tweet.likes ? tweet.likes: 0)
+    const [userLike, setUserlike] = useState(tweet.userLike === true ? true : false)
     const className = props.className ? props.className: 'btn btn-small btn-primary'
-    return action.type === 'like' ? <buttom className={className} >{tweet.likes} Like</buttom>: null
+    const actionDisplay = action.display ? action.display: 'Action'
+    const handleClick = (event) => {
+        event.preventDefault()
+        if (action.type === 'like') {
+            if (userLike === true) {
+                setLikes(likes - 1)
+                setUserlike(false)
+            } else {
+                setLikes(tweet.like+1)
+                setUserlike(true)
+            }
+            
+        }
+    }
+    const display = action.type === "like" ? `${likes} ${actionDisplay}`: actionDisplay
+    return <buttom className={className} onClick={handleClick} >{display}</buttom>
   }
   
 export function Tweet(props) {
@@ -35,8 +52,9 @@ export function Tweet(props) {
     return <div className={className}>
       <p> {tweet.id} - {tweet.content}</p>
       <div className='btn btn-primary'>
-        <ActionBtn tweet={tweet} action={{type: 'like'}}/>
-        <ActionBtn tweet={tweet} action={{type: 'unlike'}}/>
+        <ActionBtn tweet={tweet} action={{type: 'like', display: 'Likes'}}/>
+        <ActionBtn tweet={tweet} action={{type: 'unlike', display: 'UnLikes'}}/>
+        <ActionBtn tweet={tweet} action={{type: 'retweet', display: 'Retweet'}}/>
       </div>
     </div>
   }
