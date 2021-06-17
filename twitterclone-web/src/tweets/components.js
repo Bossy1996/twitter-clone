@@ -2,7 +2,29 @@ import React from 'react';
 import {useEffect, useState} from 'react';
 
 import { loadTweets } from '../lookup';
-  
+
+export function TweetsComponent(props) {
+    const textAreaRef = React.createRef()
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        const new_value = textAreaRef.current.value
+        console.log(new_value)
+        textAreaRef.current.value = ''
+
+    }
+    return <div className={props.className}>
+        <div className='col-12 mb-3'>
+            <form onSubmit={handleSubmit}>
+                <textarea ref={textAreaRef} required={true} className='form-control' name='tweet'>
+
+                </textarea>
+                <button type='submit' className='btn btn-primary my-3'>Tweet</button>
+            </form>
+        </div>
+        <TweetsList />
+    </div>
+}
+
 export function TweetsList(props) {
     const [tweets, setTweets] = useState([]);
       
