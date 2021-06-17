@@ -75,7 +75,6 @@ class TweetTestCase(TestCase):
         self.assertEqual(response.status_code, 201)
         response_data = response.json()
         new_tweet_id = response_data.get("id")
-        self.assertNotEqual(2, new_tweet_id)
         self.assertEqual(current_count + 1, new_tweet_id)
         pass
         
