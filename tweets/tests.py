@@ -6,8 +6,10 @@ from django.test import TestCase, client
 from rest_framework.test import APIClient
 
 from .models import Tweet
+
 # Create your tests here.
 User = get_user_model()
+
 
 class TweetTestCase(TestCase):
     def setUp(self):
@@ -27,7 +29,7 @@ class TweetTestCase(TestCase):
         client = APIClient()
         client.login(username=self.user.username, password='somepassword')
         return client
-    
+
     def test_tweet_list(self):
         client = self.get_client()
         response = client.get("/api/tweets/")
@@ -72,7 +74,7 @@ class TweetTestCase(TestCase):
         request_data = {"content": "this is my test Tweet"}
         client = self.get_client()
         current_count = self.current_count
-        response = client.post("/api/tweets/create/",  request_data)
+        response = client.post("/api/tweets/create/", request_data)
         self.assertEqual(response.status_code, 201)
         response_data = response.json()
         new_tweet_id = response_data.get("id")
