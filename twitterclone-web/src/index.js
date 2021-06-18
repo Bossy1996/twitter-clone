@@ -3,13 +3,27 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { TweetsComponent } from './tweets';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const appEl = document.getElementById('root')
+if (appEl) {
+  ReactDOM.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+    appEl
+  );
+}
+const tweetElement = document.getElementById("root-2")
+if (tweetElement) {
+  ReactDOM.render(
+    <React.StrictMode>
+      <TweetsComponent />
+    </React.StrictMode>,
+    tweetElement
+  );
+}
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
