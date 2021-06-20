@@ -28,3 +28,6 @@ yarn-error.log*
 
 # Pipenv
 Pipfile.lock
+
+#Django
+tweets/__pycache__
