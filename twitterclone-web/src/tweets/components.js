@@ -15,6 +15,7 @@ export function TweetsComponent(props) {
           console.log(response, status)
           if (status === 201) {
             tempNewTweets.unshift(response)
+            setNewTweets(tempNewTweets)
           } else {
             alert("An error ocurred please try again")
           }
@@ -22,7 +23,7 @@ export function TweetsComponent(props) {
         })
         
         
-        setNewTweets(tempNewTweets)
+        
         textAreaRef.current.value = ''
 
     }
