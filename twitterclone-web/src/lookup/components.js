@@ -45,11 +45,11 @@ function lookup(method, endpoint, callback, data) {
 }
 
 export const createTweet = (newTweet, callback) => {
-  lookup("POST", "tweets/create", callback, {content: newTweet})
+  lookup("POST", "tweets/create/", callback, {content: newTweet})
 }
 
 export const loadTweets = (callback) => {
 
-  lookup("GET", "tweets", callback)
+  lookup("GET", "tweets/", callback)
 
 }

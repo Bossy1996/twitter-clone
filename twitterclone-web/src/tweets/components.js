@@ -12,6 +12,7 @@ export function TweetsComponent(props) {
         console.log(new_value)
         let tempNewTweets = [...newTweets]
         createTweet(new_value, (response, status) => {
+          console.log(response, status)
           if (status === 201) {
             tempNewTweets.unshift(response)
           } else {
