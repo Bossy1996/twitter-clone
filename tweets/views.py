@@ -95,7 +95,6 @@ def tweet_action_view(request, *args, **kwargs):
             serializer = TweetSerializer(obj)
             return Response(serializer.data, status=200)
         elif action == "retweet":
-            # TODO
             new_tweet = Tweet.objects.create(user=request.user, parent=obj, content=content)
             serializer = TweetSerializer(new_tweet)
             Response(serializer.data, status=200)
