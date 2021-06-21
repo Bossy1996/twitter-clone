@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './components/app/App';
 import reportWebVitals from './reportWebVitals';
-import { TweetsComponent } from './tweets';
 
 const appEl = document.getElementById('root')
 if (appEl) {
@@ -12,15 +11,6 @@ if (appEl) {
       <App />
     </React.StrictMode>,
     appEl
-  );
-}
-const tweetElement = document.getElementById("root-2")
-if (tweetElement) {
-  ReactDOM.render(
-    <React.StrictMode>
-      <TweetsComponent />
-    </React.StrictMode>,
-    tweetElement
   );
 }
 
