@@ -32,3 +32,4 @@ reportWebVitals();
 
 // This is a comment saying that i don't want to code toady beacuse i'm lazy
 // Probably i'm coding today but beacuse i don't know if i'm doing it this is a precaution mesure
+// cheat
