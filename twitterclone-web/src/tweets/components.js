@@ -1,7 +1,7 @@
 import React from 'react';
 import {useEffect, useState} from 'react';
 
-import { createTweet ,loadTweets } from '../lookup';
+import { apiTweetCreate ,apiTweetList } from './lookup';
 
 export function TweetsComponent(props) {
     const textAreaRef = React.createRef()
@@ -11,7 +11,7 @@ export function TweetsComponent(props) {
         const new_value = textAreaRef.current.value
         console.log(new_value)
         let tempNewTweets = [...newTweets]
-        createTweet(new_value, (response, status) => {
+        apiTweetCreate(new_value, (response, status) => {
           console.log(response, status)
           if (status === 201) {
             tempNewTweets.unshift(response)
@@ -65,7 +65,7 @@ export function TweetsList(props) {
             alert("There was an error")
           }
         }
-        loadTweets(myCallback)
+        apiTweetList(myCallback)
   }
     }, [tweetsInit, tweetsDidSet, setTweetsDidSet])
     return tweets.map((item, index) => {

@@ -1,10 +1,10 @@
-import { loadTweets } from "../lookup"
+import { lookup } from "../lookup"
 
-export const createTweet = (newTweet, callback) => {
+export const apiTweetCreate = (newTweet, callback) => {
     lookup("POST", "tweets/create/", callback, {content: newTweet})
   }
   
-  export const loadTweets = (callback) => {
+  export const apiTweetList = (callback) => {
   
     lookup("GET", "tweets/", callback)
   
