@@ -1,6 +1,5 @@
-import { createTweet, loadTweets } from "./components";
+import { lookup } from "./components";
 
 export {
-    createTweet,
-    loadTweets,
+    lookup
 }

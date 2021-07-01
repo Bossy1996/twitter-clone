@@ -14,7 +14,7 @@ function getCookie(name) {
   return cookieValue;
 }
 
-function lookup(method, endpoint, callback, data) {
+export function lookup(method, endpoint, callback, data) {
   let jsonData;
   if (data) {
     jsonData = JSON.stringify(data)
@@ -44,12 +44,3 @@ function lookup(method, endpoint, callback, data) {
 
 }
 
-export const createTweet = (newTweet, callback) => {
-  lookup("POST", "tweets/create/", callback, {content: newTweet})
-}
-
-export const loadTweets = (callback) => {
-
-  lookup("GET", "tweets/", callback)
-
-}
