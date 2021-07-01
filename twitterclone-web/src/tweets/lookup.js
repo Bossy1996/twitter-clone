@@ -4,7 +4,7 @@ export const apiTweetCreate = (newTweet, callback) => {
     lookup("POST", "tweets/create/", callback, {content: newTweet})
   }
   
-  export const apiTweetList = (callback) => {
+export const apiTweetList = (callback) => {
   
     lookup("GET", "tweets/", callback)
   
