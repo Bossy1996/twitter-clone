@@ -107,7 +107,10 @@ export function Tweet(props) {
     const {tweet} = props
     const className = props.className ? props.className: 'col-10 mx-auto col-md-6'
     return <div className={className}>
-      <p> {tweet.id} - {tweet.content}</p>
+        <div>
+          <p> {tweet.id} - {tweet.content}</p>
+          {tweet.parent && <div><Tweet tweet={tweet.parent} /></div>}
+        </div>
       <div className='btn btn-primary'>
         <ActionBtn tweet={tweet} action={{type: 'like', display: 'Likes'}}/>
         <ActionBtn tweet={tweet} action={{type: 'unlike', display: 'UnLikes'}}/>
