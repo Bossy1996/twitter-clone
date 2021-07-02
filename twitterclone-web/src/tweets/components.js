@@ -76,13 +76,16 @@ export function TweetsList(props) {
 export function ActionBtn(props){
     const {tweet, action} = props
     const [likes, setLikes] = useState(tweet.likes ? tweet.likes: 0)
-    const [userLike, setUserlike] = useState(tweet.userLike === true ? true : false)
+    // const [userLike, setUserlike] = useState(tweet.userLike === true ? true : false)
     const className = props.className ? props.className: 'btn btn-small btn-primary'
     const actionDisplay = action.display ? action.display: 'Action'
     
     const handleActionBackendEvent = (response, status) => {
       console.log(status, response)
-      if (action.type === 'like') {
+      if (status === 200) {
+        setLikes(response.likes)
+      }
+      /* if (action.type === 'like') {
         if (userLike === true) {
             setLikes(likes - 1)
             setUserlike(false)
@@ -90,7 +93,7 @@ export function ActionBtn(props){
             setLikes(tweet.like+1)
             setUserlike(true)
         }
-    }
+    } */
     const handleClick = (event) => {
         event.preventDefault()
         apiTweetAction(tweet.id, action.type, handleActionBackendEvent)  
