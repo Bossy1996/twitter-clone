@@ -20,7 +20,7 @@ def create_tweet_view(request, *args, **kwargs):
     """
     Creates a new Tweet from request data
     """
-    serializer = TweetSerializer(data=request.data)
+    serializer = TweetCreateSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         serializer.save(user=request.user)
         return Response(serializer.data, status=201)
