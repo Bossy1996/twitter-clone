@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from rest_framework import permissions, serializers
 
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.decorators import action, api_view, permission_classes, authentication_classes
@@ -12,24 +13,31 @@ from .serializers import (
     TweetActionSerializer
 )
 
-# Create your views here.
 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def create_tweet_view(request, *args, **kwargs):
     """
-    Creates a new Tweet
+    Creates a new Tweet from request data
     """
     serializer = TweetSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         serializer.save(user=request.user)
         return Response(serializer.data, status=201)
     return Response({}, status=400)
-    pass
 
-def delete_tweet_view():
+@api_view(['DELETE', 'POST'])
+@permission_classes([IsAuthenticated])
+def delete_tweet_view(request, tweet_id, *args, **kwargs):
     """
     Deletes a Tweet based on  tweet_id
     """
-    pass
+    qs = Tweet.objects.filter(id=tweet_id)
+    if not qs.exists():
+        return Response({}, status=404)
+    obj = qs.first()
+    serializer = TweetSerializer(obj)
+    return Response(serializer.data)
 
 def action_tweet_view():
     """
