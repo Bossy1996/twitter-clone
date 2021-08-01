@@ -2,6 +2,13 @@
 db.sqlite3
 .env
 twitterclone/__pycache__
+twitterclone/rest_api/__pycache__
+
+#TWITTERCLONE/DIRECTMESSAGE
+directmessage/__pycache__
+
+#TWITTERCLONE/USER
+users/__pycache__
 
 ## TWITTECLONE-WEB
 # dependencies
