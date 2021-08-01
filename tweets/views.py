@@ -39,16 +39,50 @@ def delete_tweet_view(request, tweet_id, *args, **kwargs):
     serializer = TweetSerializer(obj)
     return Response(serializer.data)
 
-def action_tweet_view():
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def action_tweet_view(request, *args, **kwargs):
     """
+    Id is required,
     Three actions: Like, Unlike and Retweet
     """
-    pass
+    serializer = TweetActionSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        data = serializer.validated_data
+        tweet_id = data.get("id")
+        action = data.get("action")
+        content = data.get("content")
 
-def tweet_detail_view():
+        qs = Tweet.objects.filter(id=tweet_id)
+        if not qs.exists():
+            return Response({}, status=404)
+        obj = qs.first()
+        if action == "like":
+            obj.likes.add(request.user)
+            serializer = TweetSerializer(obj)
+            return Response(serializer.data, status=200)
+        elif action == "unlike":
+            obj.likes.remove(request.user)
+            serializer = TweetSerializer(obj)
+            return Response(serializer.data, status=200)
+        elif action == "retweet":
+            new_tweet = Tweet.objects.create(user=request.user, parent=obj, content=content)
+            serializer = TweetSerializer(new_tweet)
+            Response(serializer.data, status=200)
+    return Response({}, status=200)
+
+@api_view(['GET'])
+def tweet_detail_view(request, tweet_id, *args, **kwargs):
     """In Detail view of the tweet, requieres tweet_id"""
-    pass
+    qs = Tweet.objects.filter(id=tweet_id)
+    if not qs.exists():
+        return Response({}, status=404)
+    obj = qs.first()
+    serializer = TweetSerializer(obj)
+    return Response(serializer.data)
 
-def tweet_list_view():
+def tweet_list_view(request, *args, **kwargs):
     """Tweet list view where it's show all the tweets"""
-    pass
+    qs = Tweet.objects.all()
+    serializer = TweetSerializer(qs, many=True)
+    return Response(serializer.data)
