@@ -12,7 +12,7 @@ class UserChangeSerializer(serializers.ModelSerializer):
         model = User
         fields = ['email']
 
-class UserSerializer(serializers.ModelSerializer):
+class UserCreationSerializer(serializers.ModelSerializer):
     
     """ email = serializers.EmailField()
     password = serializers.CharField(max_lenght=16) """
