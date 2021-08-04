@@ -12,7 +12,7 @@ class TweetActionSerializer(serializers.SerializerMethodField):
     
     id = serializers.IntegerField()
     action = serializers.CharField()
-    content = serializers.CharField(allow_blanck=True, required=False)
+    content = serializers.CharField(allow_blank=True, required=False)
 
     def validate_action(self, value):
         
