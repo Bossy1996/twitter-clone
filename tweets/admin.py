@@ -6,7 +6,7 @@ from .models import Tweet, Tweet_likes
 
 # Register your models here.
 
-class TweetLikeAdmin(admin.TabularInline):
+""" class TweetLikeAdmin(admin.TabularInline):
     model = Tweet_likes
 
 class TweetAdmin(admin.ModelAdmin):
@@ -17,4 +17,4 @@ class TweetAdmin(admin.ModelAdmin):
     class Meta:
         Model = Tweet
 
-admin.site.register(Tweet, TweetAdmin)
+admin.site.register(Tweet, TweetAdmin) """

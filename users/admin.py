@@ -5,7 +5,10 @@ from django.contrib.auth.admin import UserAdmin
 from .models import User
 from .serializers import UserCreationSerializer, UserChangeSerializer
 
-class CustomUserAdmin(UserAdmin):
+""" class CustomUserAdmin(UserAdmin):
+
+    class Meta:
+        Model = User
 
     list_display = ('email', 'is_staff', 'is_active')
     list_filter = ('email', 'is_staff', 'is_active')
@@ -22,8 +25,4 @@ class CustomUserAdmin(UserAdmin):
     search_fields = ['email']
     ordering = ('email')
 
-    class Meta:
-        Model = User
-
-
-admin.site.register(User, CustomUserManager)
+admin.site.register(User, CustomUserManager) """
