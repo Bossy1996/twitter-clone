@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import SlideDown from 'react-slidedown';
 import { createPopper } from '@popperjs/core';
 import ResizeObserver from 'resize-observer-polyfill';
-import { SidebarContext } from '../Sidebar';
+import { SidebarContext } from '../SideBar';
 
 export type Props = React.LiHTMLAttributes<HTMLLIElement> & {
   children?: React.ReactNode;
