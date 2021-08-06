@@ -12,15 +12,15 @@ users/__pycache__
 
 ## TWITTECLONE-WEB
 # dependencies
-twitterclone-web/node_modules
-twitterclone-web/.pnp
+frontend/node_modules
+frontend/.pnp
 .pnp.js
 
 # testing
-twitterclone-web/coverage
+frontend/coverage
 
 # production
-twitterclone-web/build
+frontend/build
 
 # misc
 .DS_Store
