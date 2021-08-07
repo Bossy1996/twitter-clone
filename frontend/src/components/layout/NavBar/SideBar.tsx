@@ -1,4 +1,4 @@
-import React, { fordwardRef, createContext, useEffect, useState } from 'react';
+import React, { forwardRef, createContext, useEffect, useState } from 'react';
 import classNames from 'classnames';
 
 export type Props = React.HTMLAttributes<HTMLElement> & {
@@ -94,4 +94,4 @@ const Sidebar: React.ForwardRefRenderFunction<unknown, Props> = (
     );
 };
 
-export default fordwardRef<unknown, Props>(Sidebar)
+export default forwardRef<unknown, Props>(Sidebar)
