@@ -17,6 +17,7 @@
     "react-scripts": "4.0.3",
     "react-slidedown": "^2.4.5",
     "resize-observer-polyfill": "^1.5.1",
+    "sass": "^1.37.5",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
