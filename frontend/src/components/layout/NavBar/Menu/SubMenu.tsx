@@ -36,7 +36,7 @@ const SubMenu: React.ForwardRefRenderFunction<unknown, Props> = (
   },
   ref,
 ) => {
-  let popperInstance;
+  let popperInstance: any;
   const { collapsed, rtl, toggled } = useContext(SidebarContext);
   const [closed, setClosed] = useState(!defaultOpen);
   const popperElRef = useRef(null);
@@ -74,7 +74,7 @@ const SubMenu: React.ForwardRefRenderFunction<unknown, Props> = (
           });
 
           ro.observe(popperElRef.current);
-          ro.observe(referenceElement.current);
+          ro.observe(referenceElement.current!);
         }
 
         setTimeout(() => {
@@ -98,36 +98,36 @@ const SubMenu: React.ForwardRefRenderFunction<unknown, Props> = (
   return (
     <li
       ref={subMenuRef}
-      className={classNames('pro-menu-item pro-sub-menu', className, {
+      className={classNames('menu-item sub-menu', className, {
         open: typeof open === 'undefined' ? !closed : open,
       })}
       {...rest}
     >
       <div
         ref={referenceElement}
-        className="pro-inner-item"
+        className="inner-item"
         onClick={handleToggleSubMenu}
         onKeyPress={handleToggleSubMenu}
         role="button"
         tabIndex={0}
       >
         {icon ? (
-          <span className="pro-icon-wrapper">
-            <span className="pro-icon">{icon}</span>
+          <span className="icon-wrapper">
+            <span className="icon">{icon}</span>
           </span>
         ) : null}
         {prefix ? <span className="prefix-wrapper">{prefix}</span> : null}
-        <span className="pro-item-content">{title}</span>
+        <span className="item-content">{title}</span>
         {suffix ? <span className="suffix-wrapper">{suffix}</span> : null}
-        <span className="pro-arrow-wrapper">
-          <span className="pro-arrow" />
+        <span className="arrow-wrapper">
+          <span className="arrow" />
         </span>
       </div>
 
       {firstchild && collapsed ? (
         <div
           ref={popperElement}
-          className={classNames('pro-inner-list-item popper-element', { 'has-arrow': popperarrow })}
+          className={classNames('inner-list-item popper-element', { 'has-arrow': popperarrow })}
         >
           <div className="popper-inner" ref={popperElRef}>
             <ul>{children}</ul>
@@ -137,7 +137,7 @@ const SubMenu: React.ForwardRefRenderFunction<unknown, Props> = (
       ) : (
         <SlideDown
           closed={typeof open === 'undefined' ? closed : !open}
-          className="pro-inner-list-item"
+          className="inner-list-item"
         >
           <div>
             <ul>{children}</ul>
