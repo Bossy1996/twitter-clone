@@ -13,7 +13,7 @@ const SidebarContent: React.ForwardRefRenderFunction<unknown, Props> = (
     const sidebarContentRef: LegacyRef<HTMLDivElement> = (ref as any) || React.createRef<HTMLDivElement>();
     
     return (
-        <div ref={sidebarContentRef} className={className('sidebar-content', className)} {...rest}>
+        <div ref={sidebarContentRef} className={classNames('sidebar-content', className)} {...rest}>
             {children}
         </div>
     );
