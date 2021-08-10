@@ -18,8 +18,8 @@ const Menu: React.ForwardRefRenderFunction<unknown, Props> = (
   return (
     <nav
       ref={menuRef}
-      className={classNames('pro-menu', className, {
-        [`shaped ${iconShape}`]: ['square', 'round', 'circle'].indexOf(iconShape) >= 0,
+      className={classNames('menu', className, {
+        [`shaped ${iconShape}`]: ['square', 'round', 'circle'].indexOf(iconShape!) >= 0,
       })}
       {...rest}
     >
