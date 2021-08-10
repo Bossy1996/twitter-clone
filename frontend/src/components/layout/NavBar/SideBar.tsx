@@ -45,9 +45,9 @@ const Sidebar: React.ForwardRefRenderFunction<unknown, Props> = (
     ref,
 ) => {
     const [sidebarState, setSidebarState] = useState({
-        collapsed: typeof collapsed === 'undefined' ? false : collapsed,
-        rtl: typeof rtl === 'undefined' ? false : rtl,
-        toggled: typeof toggled === 'undefined' ? false : toggled,
+        collapsed: typeof collapsed === undefined ? false : collapsed,
+        rtl: typeof rtl === undefined ? false : rtl,
+        toggled: typeof toggled === undefined ? false : toggled,
     });
 
     const sidebarRef: React.RefObject<HTMLDivElement> = (ref as any) || React.createRef<HTMLDivElement>();
