@@ -67,9 +67,9 @@ const Sidebar: React.ForwardRefRenderFunction<unknown, Props> = (
     useEffect(() => {
         setSidebarState({ ...sidebarState, collapsed, rtl, toggled });
     }, [collapsed, rtl, toggled]);
-
+    // Type error
     return (
-        <SidebarContext.Provider value={sidebarState}>
+        <SidebarContext.Provider value={sidebarState}> 
             <div
                 ref={sidebarRef}
                 className={classNames('sidebar', className, breakPoint, { collapsed, rtl, toggled })}
